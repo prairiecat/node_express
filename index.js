@@ -1,28 +1,30 @@
 const fs = require("fs")
 const express = require('express')
 const app = express()
-app.use(express.urlencoded({extended: true}))
-const activities = require("./activities.json")
+app.use(express.urlencoded({extended: true, limit: '10mb'}))
+
+// 静的ファイルを提供するための設定を追加
+app.use(express.static(__dirname))
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/index.html")
 })
 
-app.post("/autumn", function(req, res) {
-    fs.writeFile(__dirname + "/data.txt", req.body.activity, function(){
-        res.send("投稿完了")
-    })
+app.get("/camera", function(req, res) {
+    res.sendFile(__dirname + "/camera.html")
 })
 
-app.post("/update", function(req, res) {
-    activities[0].activity = req.body.updateActivity
-    res.send(activities)
+app.get("/friend", function(req, res) {
+    res.sendFile(__dirname + "/friend.html")
 })
 
-app.post("/delete", function(req, res) {
-    activities.splice(req.body.number, 1)
-    res.send(activities)
-})
+// app.get("/after", function(req, res){
+//     res.sendFile(__dirname + "/afterHome.html")
+// })
+
+// 新しいルーティングファイルをインポートして使用
+const photoRoutes = require('./photoRoutes');
+app.use('/', photoRoutes);
 
 const port = process.env.PORT || 5050
 

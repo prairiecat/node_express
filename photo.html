@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>写真の確認</title>
+</head>
+<body>
+    <h1>写真の確認</h1>
+    <img id="photo" src="" alt="撮影した写真">
+    <form action="/camera" method="get">
+        <button type="submit" id="retake">再撮影</button>
+    </form>
+    <button id="ok">OK</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const photoData = localStorage.getItem('photoData');
+            if (photoData) {
+                document.getElementById('photo').src = photoData;
+            }
+
+            // 再撮影ボタンを押したときにローカルストレージから写真データを削除
+            document.getElementById('retake').addEventListener('click', function() {
+                localStorage.removeItem('photoData');
+            });
+
+            // OKボタンを押したときに写真データをバックエンドに送信し、ローカルストレージから削除
+            document.getElementById('ok').addEventListener('click', function() {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/save-photo';
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'photo';
+                input.value = photoData;
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+                // ローカルストレージから写真データを削除
+                localStorage.removeItem('photoData');
+            });
+        });
+    </script>
+</body>
+</html>

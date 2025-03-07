@@ -8,16 +8,12 @@
 <body>
     <h1>キャラクターがいるよ</h1>
     <p>@~@</p>
-    <form id="cameraForm" action="/camera" method="get">
+    <form id="cameraForm" action="/camera" method = "GET">
         <button id="cameraButton">写真を撮る</button>
     </form>
-    <form action="/friend" method="get">
+    <form action="/friend" method ="get">
         <button>フレンド一覧</button>
     </form>
-    <br>
-    <br>
-    <br>
-    <button id="clearStorageButton">ローカルストレージをクリア</button>
     <p id="message" style="color: red; display: none;">既に撮影済みのため写真は撮れません</p>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -25,15 +21,8 @@
             const message = document.querySelector('#message');
 
             cameraButton.addEventListener('click', function(event) {
-                if (localStorage.getItem('photoTaken') === 'true') {
-                    event.preventDefault();
-                    message.style.display = 'block';
-                }
-            });
-
-            clearStorageButton.addEventListener('click', function() {
-                localStorage.clear();
-                alert('ローカルストレージがクリアされました');
+                event.preventDefault();
+                message.style.display = 'block';
             });
         });
     </script>

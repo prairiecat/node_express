@@ -37,4 +37,32 @@ router.get("/photos/:fileName", function(req, res) {
     });
 });
 
+// 写真の一覧を表示するエンドポイント
+router.get("/photos", function(req, res) {
+    const photosDir = path.join(__dirname, 'photos');
+    fs.readdir(photosDir, (err, files) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("写真の一覧を取得できませんでした");
+        } else {
+            const photoList = files.map(file => `<li><a href="/photos/${file}">${file}</a></li>`).join('');
+            res.send(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>保存された写真</title>
+                </head>
+                <body>
+                    <h1>保存された写真</h1>
+                    <ul>${photoList}</ul>
+                    <a href="/">ホームに戻る</a>
+                </body>
+                </html>
+            `);
+        }
+    });
+});
+
 module.exports = router;

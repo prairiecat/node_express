@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const context = canvas.getContext('2d');
 
     // カメラを起動
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
         .then(function(stream) {
             video.srcObject = stream;
         })

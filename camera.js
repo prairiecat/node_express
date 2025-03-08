@@ -5,13 +5,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const context = canvas.getContext('2d');
 
     // カメラを起動
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
-        .then(function(stream) {
-            video.srcObject = stream;
-        })
-        .catch(function(err) {
-            console.log("カメラの起動に失敗しました: " + err);
-        });
+    navigator.mediaDevices.getUserMedia({ 
+        video: { 
+            facingMode: { exact: "environment" },
+            width:{ideal:360},
+            height: {ideal:640}
+        }
+    })
+    .then(function(stream) {
+        video.srcObject = stream;
+    })
+    .catch(function(err) {
+        console.log("カメラの起動に失敗しました: " + err);
+    });
 
     // 写真を撮る処理
     snapButton.addEventListener('click', function() {

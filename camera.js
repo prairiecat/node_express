@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     navigator.mediaDevices.getUserMedia({ 
         video: { 
             facingMode: { exact: "environment" },
-            width:{ideal:360},
-            height: {ideal:640}
+            width:{ideal:640},
+            height: {ideal:360}
         }
     })
     .then(function(stream) {

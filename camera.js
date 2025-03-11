@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const snapButton = document.getElementById('snap');
-    const cameraSelect = document.getElementById('cameraSelect');
+    const useFrontCameraButton = document.getElementById('useFrontCamera');
+    const useBackCameraButton = document.getElementById('useBackCamera');
     const context = canvas.getContext('2d');
 
     function startCamera(facingMode) {
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         startCamera('environment');
     });
+
     // 写真を撮る処理
     snapButton.addEventListener('click', function() {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);

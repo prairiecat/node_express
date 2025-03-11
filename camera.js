@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 初期カメラ起動（アウトカメラ）
-    startCamera('environment');
+    startCamera('user');
 
     // インカメラを使用するボタンの処理
     useFrontCameraButton.addEventListener('click', function() {

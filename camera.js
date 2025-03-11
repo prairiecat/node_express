@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 height: { ideal: 360 }
             }
         };
-        if (facingMode) {
+        if (facingMode==='user') {
+            constraints.video.facingMode = { facingMode };
+        } else {
             constraints.video.facingMode = { exact: facingMode };
         }
 

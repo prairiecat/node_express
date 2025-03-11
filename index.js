@@ -18,6 +18,10 @@ app.get("/friend", function(req, res) {
     res.sendFile(__dirname + "/friend.html")
 })
 
+app.post("/gage", function(req, res) {
+    res.sendFile(__dirname + "/acumulated.html")
+})
+
 // app.get("/after", function(req, res){
 //     res.sendFile(__dirname + "/afterHome.html")
 // })

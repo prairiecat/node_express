@@ -7,19 +7,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const context = canvas.getContext('2d');
 
     function startCamera(facingMode) {
-        navigator.mediaDevices.getUserMedia({
+        const constraints = {
             video: {
-                facingMode: { exact: facingMode },
                 width: { ideal: 640 },
                 height: { ideal: 360 }
             }
-        })
-        .then(function(stream) {
-            video.srcObject = stream;
-        })
-        .catch(function(err) {
-            console.log("カメラの起動に失敗しました: " + err);
-        });
+        };
+        if (facingMode) {
+            constraints.video.facingMode = { exact: facingMode };
+        }
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function(stream) {
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.log("カメラの起動に失敗しました: " + err);
+            });
     }
 
     // 初期カメラ起動（アウトカメラ）
